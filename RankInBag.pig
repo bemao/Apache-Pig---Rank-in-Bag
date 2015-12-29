@@ -7,7 +7,7 @@ A = LOAD 'median_test.csv' USING PigStorage(',') AS (state,city,population:doubl
 B = GROUP A BY state;
 C = FOREACH B{
      numGroup = COUNT($1);     -numGroup is added for standardizing rankings (not shown)
-     temp = ORDER $1 BY num DESC; 
+     temp = ORDER A BY population DESC; 
      GENERATE group, Enumerate(temp), numGroup AS numGroup;
      }
 D = FOREACH C GENERATE FLATTEN($1), numGroup;
